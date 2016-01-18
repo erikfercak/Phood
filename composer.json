@@ -1,0 +1,10 @@
+{
+    "name": "Phood",
+    "licence": "MIT",
+    "description": "Local restaurants scrapper",
+
+    "require": {
+        "php": ">=5.3",
+        "duzun/hQuery": "~1.4"
+    }
+}
