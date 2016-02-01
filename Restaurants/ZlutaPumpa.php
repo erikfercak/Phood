@@ -17,9 +17,18 @@ class ZlutaPumpa implements IRestaurant {
         ];
         $dom = hQuery::fromUrl('http://www.zluta-pumpa.info/denni-menu/', $headers);
         $food = $dom->find('div.post h4 strong');
+
+        if ($food == NULL) {
+            $food = $dom->find('div.post h4');
+        }
+
+        if ($food == NULL) {
+            return $menu;
+        }
+
         foreach ($food as $entry) {
             $entry = trim($entry->text(), " \t\n\r\0\x0B\xC2\xA0");
-            if (preg_match('~Polévka:(?: \d\.)?(.*)$~ui', $entry, $m)) {
+            if (preg_match('~Polévka:(?:\s*\d\.)?(.*)$~ui', $entry, $m)) {
                 $menu['Polievky'][] = [
                     'name' => $m[1],
                     'price' => 25,
