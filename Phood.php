@@ -36,8 +36,36 @@ function renderMenu(Restaurants\IRestaurant $restaurant) {
     }
 }
 
-renderMenu(new Restaurants\Kravin());
-renderMenu(new Restaurants\MlsnejKocour());
-renderMenu(new Restaurants\Ordr());
-renderMenu(new Restaurants\RetroMusicHall());
-renderMenu(new Restaurants\ZlutaPumpa());
+$availableRestaurants = array('kravin', 'kocour', 'ordr', 'retro', 'pumpa');
+$options = getopt('', $availableRestaurants);
+
+$restaurants = array();
+foreach ($options as $restaurant => $nothing) {
+    if (in_array($restaurant, $availableRestaurants)) {
+        $restaurants[] = $restaurant;
+    }
+}
+
+if (empty($restaurants)) {
+    $restaurants = $availableRestaurants;
+}
+
+foreach ($restaurants as $restaurant) {
+    switch ($restaurant) {
+        case 'kravin':
+            renderMenu(new Restaurants\Kravin());
+            break;
+        case 'kocour':
+            renderMenu(new Restaurants\MlsnejKocour());
+            break;
+        case 'ordr':
+            renderMenu(new Restaurants\Ordr());
+            break;
+        case 'retro':
+            renderMenu(new Restaurants\RetroMusicHall());
+            break;
+        case 'pumpa':
+            renderMenu(new Restaurants\ZlutaPumpa());
+            break;
+    }
+}
