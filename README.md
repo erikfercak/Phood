@@ -6,4 +6,5 @@ Displays lunch menus of restaurants near my work
     cd Phood && composer install
 
 # Usage
-php Phood.php
+php Phood.php [--kocour] [--kravin] [--ordr] [--pumpa] [--retro] # Shows all menus by default
+
