@@ -40,10 +40,14 @@ class RetroMusicHall implements IRestaurant {
                     $price = $m[1];
                 }
 
-                $menu[$section][] = [
-                    'name' => $name,
-                    'price' => $price,
-                ];
+                if (empty($price)) {
+                    $menu[$section][count($menu[$section]) -1]['name'] .= ' ' . $name;
+                } else {
+                    $menu[$section][] = [
+                        'name' => $name,
+                        'price' => $price,
+                    ];
+                }
 
                 $name = 'N/A';
                 $price = 'N/A';
