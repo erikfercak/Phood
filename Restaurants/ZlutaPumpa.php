@@ -28,19 +28,21 @@ class ZlutaPumpa implements IRestaurant {
 
         foreach ($food as $entry) {
             $entry = trim($entry->text(), " \t\n\r\0\x0B\xC2\xA0");
-            if (preg_match('~Polévka:(?:\s*\d\.)?(.*)$~ui', $entry, $m)) {
+            if (preg_match('~Polévka:\s*(?:\d\.)?(.*)$~mui', $entry, $m)) {
                 $menu['Polievky'][] = [
                     'name' => $m[1],
                     'price' => 25,
                 ];
-            } elseif (preg_match('~Předkrm:(?: \d\.)?(.*)$~ui', $entry, $m)) {
+            }
+            if (preg_match('~Předkrm:(.*)$~mui', $entry, $m)) {
                 $menu['Predkrm'][] = [
-                    'name' => $m[1],
+                    'name' => preg_replace('~\s+~u', ' ', trim($m[1])),
                     'price' => 0,
                 ];
-            } elseif (preg_match('~Hlavní jídlo(?: \d)?:(?: \d\. ?)?(.*)$~mui', $entry, $m)) {
+            }
+            if (preg_match('~Hlavní jídlo:(?:\s*\d\.\s*)?(.*)$~mui', $entry, $m)) {
                 $menu['Hlavne jedlo'][] = [
-                    'name' => $m[1],
+                    'name' => preg_replace('~\s+~u', ' ', trim($m[1])),
                     'price' => 99,
                 ];
             }
